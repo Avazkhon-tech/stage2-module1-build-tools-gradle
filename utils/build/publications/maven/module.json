@@ -51,6 +51,13 @@
           "version": {
             "requires": "3.10"
           }
+        },
+        {
+          "group": "org.junit.jupiter",
+          "module": "junit-jupiter",
+          "version": {
+            "requires": "5.8.1"
+          }
         }
       ],
       "files": [
