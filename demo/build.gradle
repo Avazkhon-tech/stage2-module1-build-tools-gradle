@@ -1,9 +1,48 @@
-dependencies {
-    implementation project(":utils")
+plugins{
+    id 'java'
+    id 'maven-publish'
 }
+
+java{
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+
+repositories{
+    mavenCentral()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+
+            groupId 'com.epam.demo'
+            artifactId 'demo'
+            version '1.0'
+
+            from components.java
+        }
+    }
+}
+
 
 test {
     useJUnitPlatform()
+}
+
+dependencies {
+    implementation project(":utils")
+    implementation 'org.apache.commons:commons-lang3:3.10'
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+jar {
+    manifest {
+        //provide manifest with such attributes as 'Implementation-Title', 'Implementation-Version'
+        attributes 'Main-Class': 'com.epam.demo.Utils'
+    }
 }
 
 compileJava {}.dependsOn(':utils:publishToMavenLocal')
